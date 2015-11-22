@@ -8,6 +8,7 @@ RSpec.describe MyPoll, type: :model do
     it{ should validate_presence_of(:description) }
     it{ should ensure_length_of(:description).is_at_least(20) }
     it{ should validate_presence_of(:expires_at) }
+    it{ should validate_presence_of(:user) }
     
     it 'should return valid when is not expired' do        
         my_poll = FactoryGirl.create(:my_poll, expires_at: DateTime.now + 1.minute)        

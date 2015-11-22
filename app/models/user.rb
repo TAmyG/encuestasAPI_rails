@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
-    validates :email, presence: true, email:true
+    validates :email, presence: true, email:true, uniqueness: true
     validates :uid, presence: true
     validates :provider, presence: true
     has_many :tokens
+    has_many :my_polls
     
     def self.from_omniauth(data)
 #Recibir hash de datos

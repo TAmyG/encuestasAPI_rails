@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
     
     #before_action: authenticate
     
+    
+    #    Cualquier método definido aquí, 
+    #    es heredado hacia los demas controladores
+    
+    
     def authenticate
         #@current_user = User.first
         token_str = params[:token]
@@ -12,9 +17,8 @@ class ApplicationController < ActionController::Base
         
         if token.nil?  || !token.is_valid?
             render json:{
-                error: 'tu token es inválido', 
-                status: unauthorized
-            }
+                error: 'tu token es inválido'
+            },  status: :unauthorized
         else
             @current_user = token.user
         end
