@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 #mapea todo lo que llega a polls 
 #hacia el controlador my_polls, 
 #para no tener que usar my_polls en las rutas
-            resources :polls, controller: 'my_polls', except: [:new, :edit]
+#los except, indica que se van a obviar las vistas para esas peticiones
+            resources :polls, controller: 'my_polls', except: [:new, :edit] do
+            	resources :questions, except: [:new, :edit]
+            end            
         end
     end
 end
