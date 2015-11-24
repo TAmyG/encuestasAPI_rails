@@ -12,7 +12,7 @@ RSpec.describe Api::V1::MyPollsController, type: :request do
         
         it 'mande la lista de encuestas' do
             json = JSON.parse(response.body)
-            expect(json.length).to eq(MyPoll.count)    
+            expect(json['data'].length).to eq(MyPoll.count)    
         end
         
     end
@@ -28,12 +28,12 @@ RSpec.describe Api::V1::MyPollsController, type: :request do
         #Si se le antepone la x, entonces se salta la prueba
         it 'manda la encuesta solicitada' do
             json = JSON.parse(response.body)
-            expect(json['id']).to eq(@poll.id)
+            expect(json['data']['id']).to eq(@poll.id)
         end
         
         it 'manda los atributos de las encuestas' do
             json = JSON.parse(response.body)
-            expect(json.keys).to contain_exactly('id', 'title', 'description', 'expires_at', 'user_id')
+            expect(json['data']['attributes'].keys).to contain_exactly("id","title","description","expires_at","user_id","created_at","updated_at")
         end
         
     end
@@ -71,7 +71,7 @@ RSpec.describe Api::V1::MyPollsController, type: :request do
             
             it 'responde con la encuesta creada' do
                 json = JSON.parse(response.body)
-                expect(json['title']).to eq('Hola mundo')
+                expect(json['data']['attributes']['title']).to eq('Hola mundo')
             end
         end
         
@@ -130,7 +130,7 @@ RSpec.describe Api::V1::MyPollsController, type: :request do
             
             it 'actualiza la encuesta indicada' do
                 json = JSON.parse(response.body)
-                expect(json["title"]).to eq('Nuevo titulo')
+                expect(json['data']['attributes']["title"]).to eq('Nuevo titulo')
             end
         end
         

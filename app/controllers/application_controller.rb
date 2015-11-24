@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :null_session
     
     #before_action: authenticate
-    
+    before_action :set_jbuilder_defaults
     
     #    Cualquier método definido aquí, 
     #    es heredado hacia los demas controladores
@@ -23,6 +23,22 @@ class ApplicationController < ActionController::Base
         else
             @current_user = token.user
         end
+    end
+
+    def set_jbuilder_defaults
+        @errors = []
+    end
+
+    def error!(message, status)
+        @errors << message
+        response.status = status
+        render template: "api/v1/errors"
+    end
+
+    def error_array!(array, status)
+        @errors = @errors + array
+        response.status = status
+        render  "api/v1/errors"
     end
 
 

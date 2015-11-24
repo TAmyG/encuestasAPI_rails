@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
     #POST /users
     def create
         #params = {auth:{provider: , uid:}}
-         
+
         
         #si no se envían los parámetros en el post
         #entonces se responde con un msj de error
