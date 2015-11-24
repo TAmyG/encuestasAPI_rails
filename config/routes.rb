@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 #los except, indica que se van a obviar las vistas para esas peticiones
             resources :polls, controller: 'my_polls', except: [:new, :edit] do
             	resources :questions, except: [:new, :edit]
+            	resources :answers, only: [:update, :destroy, :create]
             end            
         end
     end

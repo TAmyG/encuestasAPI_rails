@@ -4,6 +4,9 @@ class Api::V1::MyPollsController < ApplicationController
     before_action :set_poll, only: [:show, :update, :destroy]
     before_action(only: [:update, :destroy]){ |controlador| controlador.authenticate_owner(@poll.user) }
     
+
+    layout 'api/v1/application'
+
     def index
         @polls = MyPoll.all
     end
@@ -34,15 +37,6 @@ class Api::V1::MyPollsController < ApplicationController
             @poll.destroy
             render json: {message: 'se elimino la encuesta'}
     end
-
-    protected
-
-    def authenticate_owner(owner)
-        if owner != @current_user
-           render json: {errors: 'no tiene autorizado eliminar la encuesta'}, status: 401
-        end
-    end
-
     
     private
 

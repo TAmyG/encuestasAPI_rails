@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     #    Cualquier método definido aquí, 
     #    es heredado hacia los demas controladores
     
+    protected
     
     def authenticate
         #@current_user = User.first
@@ -21,6 +22,13 @@ class ApplicationController < ActionController::Base
             },  status: :unauthorized
         else
             @current_user = token.user
+        end
+    end
+
+
+    def authenticate_owner(owner)
+        if owner != @current_user
+           render json: {errors: 'no tiene autorizado editar el recuurso'}, status: 401
         end
     end
 end
