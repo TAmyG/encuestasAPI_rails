@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    email "tamy.vivas@gmail.com"
+    email "tamy.vivaz@gmail.com"
     name "TAmy"
     provider "github"
     uid "MyString"

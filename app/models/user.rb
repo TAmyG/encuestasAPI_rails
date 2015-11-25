@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
     validates :provider, presence: true
     has_many :tokens
     has_many :my_polls
+    has_many :my_apps
+    has_many :user_polls
     
     def self.from_omniauth(data)
 #Recibir hash de datos

@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
     end
     
     it 'deberia encontrar un usuario si uid y provider existen' do 
-        user = FactoryGirl.create(:user)
+        user = FactoryGirl.create(:user)        
         expect{
             User.from_omniauth(
                 {
@@ -31,7 +31,7 @@ RSpec.describe User, type: :model do
     end
     
     it 'retornar usuario cuando lo encuentre' do
-        user = FactoryGirl.create(:user)
+        user = FactoryGirl.create(:user)        
         expect(
             User.from_omniauth(
                 {

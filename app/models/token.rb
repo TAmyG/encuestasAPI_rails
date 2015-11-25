@@ -1,5 +1,6 @@
 class Token < ActiveRecord::Base
     belongs_to :user
+    belongs_to :my_app
     before_create :generate_token
     
     #retorna true si la fecha actual es menor a la de expiración

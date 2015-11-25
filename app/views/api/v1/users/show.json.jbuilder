@@ -1,3 +1,3 @@
-json.(@user, :id, :provider, :email)
+json.(@user,:id,:name,:email)
 
-json.(@token, :token)
+json.(@token,:token)

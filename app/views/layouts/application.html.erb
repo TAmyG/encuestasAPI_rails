@@ -7,8 +7,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<header>
+		<nav class = "green">
+			<div class="nav-wrapper">
+				<ul class="hide-on-med-and-down">
+					<li>
+						<%= link_to "Inicio", "/"  %>
+					</li>
+					<li>
+						<%if user_signed_in? %>
+							<li>
+								<%= link_to "Nueva aplicación", new_my_app_path%>
+							</li>
 
-<%= yield %>
-
+							<li>
+								<%= link_to "Cerrar sesión", "/logout", method: :delete %>
+							</li>
+						<%else%>
+							<li>
+								<%= link_to "Ingresa aquí", "/auth/google_oauth2"%>
+							</li>
+						<%end%>
+					</li>
+				</ul>				
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<div class="card big-padding">
+			<%= yield %>	
+		</div>		
+	</div>
 </body>
 </html>

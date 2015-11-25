@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
+
+    include UserAuthentication
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-    protect_from_forgery with: :null_session
+    #protect_from_forgery with: :null_session
+
+
     
     #before_action: authenticate
     before_action :set_jbuilder_defaults
@@ -16,10 +20,8 @@ class ApplicationController < ActionController::Base
         token_str = params[:token]
         token = Token.find_by(token: token_str)
         
-        if token.nil?  || !token.is_valid?
-            render json:{
-                error: 'tu token es inválido'
-            },  status: :unauthorized
+        if token.nil? or not token.is_valid? or not @my_app.is_your_token?(token)
+            error!("Tu token es inválido", :unauthorized)
         else
             @current_user = token.user
         end

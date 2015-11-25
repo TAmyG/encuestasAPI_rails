@@ -1,6 +1,8 @@
 class MyPoll < ActiveRecord::Base
     belongs_to :user
     has_many :questions
+    has_many :user_polls
+
     validates :title, presence: true, length: {minimum:10}
     validates :expires_at, presence: true
     validates :description, presence: true, length: {minimum: 20}
